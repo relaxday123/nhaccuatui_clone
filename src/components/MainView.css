@@ -1,0 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.lazyload-wrapper {
+    padding: 60px 20px;
+}
