@@ -27,8 +27,8 @@ const MainView = () => {
   ];
 
   const containerStyles = {
-    width: "1320px",
-    height: "528px",
+    width: "936px",
+    height: "374px",
     margin: "0 auto",
     padding: "24px 0px",
   };
@@ -41,35 +41,22 @@ const MainView = () => {
 
       <div className="lazyload-wrapper">
         <div
-          className="playlist-title"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "0px 10px",
-          }}
+          className="playlist-subject"
         >
           <p
-            style={{
-              display: "inline",
-              height: "30px",
-              lineHeight: "30px",
-              fontSize: "22px",
-              fontWeight: "700",
-              color: "rgba(244,246,248,0.88)",
-            }}
           >
-            Đang Thịnh Hành
+            Giai Điệu Gây Nghiện
           </p>
           <div style={{ display: "inline" }}>
-            <a href="#">
+            <a href="/" className="left-arrow" >
               <AiOutlineArrowLeft />
             </a>
-            <a href="#">
+            <a href="/" className="right-arrow" >
               <AiOutlineArrowRight />
             </a>
           </div>
         </div>
-        <div className="list" style={{ display: "flex" }}>
+        <div className="list">
           {lists.map((list) => {
             return <Playlist playlist={list} />;
           })}
@@ -78,23 +65,19 @@ const MainView = () => {
 
       <div className="lazyload-wrapper">
         <div
-          className="playlist-title"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "0px 10px",
-          }}
+          className="playlist-subject"
         >
-          <p style={{ display: "inline" }}>Đang Thịnh Hành</p>
+          <p>Đang Thịnh Hành</p>
           <div style={{ display: "inline" }}>
-            <a href="#">
+            <a href="/" className="left-arrow" >
               <AiOutlineArrowLeft />
             </a>
-            <a href="#">
+            <a href="/" className="right-arrow" >
               <AiOutlineArrowRight />
             </a>
           </div>
         </div>
+
         <div className="list" style={{ display: "flex" }}>
           {lists.map((list) => {
             return <Playlist playlist={list} />;

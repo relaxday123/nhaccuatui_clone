@@ -1,0 +1,98 @@
+.song-name:hover {
+    color: #2daaed;
+}
+
+.karaokeic:hover {
+    color: #2daaed;
+}
+
+.artistname:hover {
+  color: #2daaed;
+}
+
+.albumname:hover {
+  color: #2daaed;
+  cursor: pointer;
+}
+
+/* CSS */
+.button-18 {
+  align-items: center;
+  background-color: #242e39;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #b5babf;
+  opacity: .7;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-18:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}
+
+.musicquality {
+  font-size: 10px;
+  padding: 8px;
+  border: none;
+}
+
+.musicquality:hover {
+  border-radius: 10%;
+  background-color:#202a36;
+}
+
+.songcontrol div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-icon {
+  cursor: pointer;
+  border: none; 
+}
+.volume-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.volume-slider {
+  display: none;
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  top: -45px;
+  left: -33px;
+  transform: rotate(270deg);
+}
+
+.volume-icon-container:hover .volume-slider {
+  display: block;
+}

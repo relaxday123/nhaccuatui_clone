@@ -1,0 +1,21 @@
+.playlist {
+    padding: 10px;
+}
+
+.playlist .playlist-img {
+    width: 205px;
+    height: 205px;
+    border-radius: 5px;
+    display: block;
+}
+
+.playlist .playlist-title {
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    display: block;
+}
+
+.playlist .playlist-title:hover {
+    color: #2daaed;
+}

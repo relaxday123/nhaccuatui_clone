@@ -1,19 +1,11 @@
 import React from "react";
+import "./Playlist.css";
 
 const Playlist = ({ playlist: { src, title } }) => {
-    const imgStyle = {
-        width: "205px",
-        height: "205px",
-        borderRadius: "5px",
-    };
-    const playlistStyle = {
-        padding: "10px"
-    }
   return (
-    <div style={playlistStyle}>
-      <img src={src} alt="Listimage" style={imgStyle}/>
-      <br />
-      <p>{title}</p>
+    <div className="playlist" >
+      <img className="playlist-img" src={src} alt="Listimage" />
+      <a className="playlist-title" href="/" >{title}</a>
     </div>
   );
 };

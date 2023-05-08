@@ -3,6 +3,31 @@
     margin: 0;
 }
 
-.lazyload-wrapper {
-    padding: 60px 20px;
+.lazyload-wrapper .playlist-subject {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px 0 40px;
+}
+
+.lazyload-wrapper .list {
+    display: flex;
+    padding: 0 30px;
+}
+
+.lazyload-wrapper .playlist-subject p {
+    display: inline;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(244, 246, 248, 0.88);
+}
+
+.left-arrow {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.right-arrow:hover * {
+    color: #2daaed;
 }
