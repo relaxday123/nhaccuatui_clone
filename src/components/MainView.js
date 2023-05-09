@@ -27,8 +27,8 @@ const MainView = () => {
   ];
 
   const containerStyles = {
-    width: "936px",
-    height: "374px",
+    width: "82.5rem",
+    height: "33rem",
     margin: "0 auto",
     padding: "24px 0px",
   };
@@ -40,18 +40,13 @@ const MainView = () => {
       </div>
 
       <div className="lazyload-wrapper">
-        <div
-          className="playlist-subject"
-        >
-          <p
-          >
-            Giai Điệu Gây Nghiện
-          </p>
+        <div className="playlist-subject">
+          <p>Giai Điệu Gây Nghiện</p>
           <div style={{ display: "inline" }}>
-            <a href="/" className="left-arrow" >
+            <a href="/" className="left-arrow">
               <AiOutlineArrowLeft />
             </a>
-            <a href="/" className="right-arrow" >
+            <a href="/" className="right-arrow">
               <AiOutlineArrowRight />
             </a>
           </div>
@@ -64,15 +59,13 @@ const MainView = () => {
       </div>
 
       <div className="lazyload-wrapper">
-        <div
-          className="playlist-subject"
-        >
+        <div className="playlist-subject">
           <p>Đang Thịnh Hành</p>
           <div style={{ display: "inline" }}>
-            <a href="/" className="left-arrow" >
+            <a href="/" className="left-arrow">
               <AiOutlineArrowLeft />
             </a>
-            <a href="/" className="right-arrow" >
+            <a href="/" className="right-arrow">
               <AiOutlineArrowRight />
             </a>
           </div>

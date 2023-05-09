@@ -1,18 +1,15 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from "react";
 
 import {
   BsShuffle,
   BsFillSkipBackwardFill,
   BsFillSkipForwardFill,
-  BsRepeat
-} from 'react-icons/bs';
+  BsRepeat,
+} from "react-icons/bs";
 
-import {
-  FaPlay,
-  FaPause
-} from 'react-icons/fa';
+import { FaPlay, FaPause } from "react-icons/fa";
 
-import "./Controls.css"
+import "./Controls.css";
 
 const Controls = ({
   audioRef,
@@ -38,7 +35,7 @@ const Controls = ({
     setTimeProgress(currentTime);
     progressBarRef.current.value = currentTime;
     progressBarRef.current.style.setProperty(
-      '--range-progress',
+      "--range-progress",
       `${(progressBarRef.current.value / duration) * 100}%`
     );
 
@@ -75,22 +72,33 @@ const Controls = ({
 
   return (
     <div className="controls-wrapper">
-      <div className="controls"  style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly"}}>
-        <button className='shufflebtn smallbtn' onClick={handlePrevious}>
-          <BsShuffle style={{ fontSize: "18px"}} />
+      <div
+        className="controls"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <button className="shufflebtn smallbtn" onClick={handlePrevious}>
+          <BsShuffle style={{ fontSize: "18px" }} />
         </button>
-        <button className='skipbwbtn smallbtn' onClick={skipBackward}>
-          <BsFillSkipBackwardFill style={{ fontSize: "18px"}} />
+        <button className="skipbwbtn smallbtn" onClick={skipBackward}>
+          <BsFillSkipBackwardFill style={{ fontSize: "18px" }} />
         </button>
 
-        <button className='playpausebtn bigbtn' onClick={togglePlayPause}>
-          {isPlaying ? <FaPause style={{ fontSize: "30px"}} /> : <FaPlay style={{ fontSize: "30px"}} />}
+        <button className="playpausebtn bigbtn" onClick={togglePlayPause}>
+          {isPlaying ? (
+            <FaPause style={{ fontSize: "30px" }} />
+          ) : (
+            <FaPlay style={{ fontSize: "30px" }} />
+          )}
         </button>
-        <button className='skipfwbtn smallbtn' onClick={skipForward}>
-          <BsFillSkipForwardFill style={{ fontSize: "18px"}}  />
+        <button className="skipfwbtn smallbtn" onClick={skipForward}>
+          <BsFillSkipForwardFill style={{ fontSize: "18px" }} />
         </button>
-        <button className='repeatbtn smallbtn' onClick={handleNext}>
-          <BsRepeat style={{ fontSize: "18px"}}  />
+        <button className="repeatbtn smallbtn" onClick={handleNext}>
+          <BsRepeat style={{ fontSize: "18px" }} />
         </button>
       </div>
     </div>

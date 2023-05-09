@@ -75,8 +75,10 @@
 }
 
 .volume-icon {
+  position: relative;
   cursor: pointer;
   border: none; 
+  z-index: 1;
 }
 .volume-icon-container {
   position: relative;
@@ -85,14 +87,28 @@
 
 .volume-slider {
   display: none;
-  position: absolute;
   width: 80px;
   height: 4px;
-  top: -45px;
-  left: -33px;
   transform: rotate(270deg);
+  margin-bottom: 1.2rem;
 }
 
 .volume-icon-container:hover .volume-slider {
   display: block;
+}
+
+.volume-icon-container:hover .volume-slider-container {
+  background-color: #18222d;
+  border-radius: 50px;
+  position: absolute;
+  top: -6.5rem;
+  left: -0.5rem;
+  width: 2rem;
+  height: 8.2rem;
+  z-index: 0;
+  animation: ease 1s;
+}
+
+.volume-icon-container:hover .volume-icon-container * {
+  color: #18222d;
 }

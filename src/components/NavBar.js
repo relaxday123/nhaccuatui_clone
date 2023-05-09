@@ -11,12 +11,11 @@ import {
   BsMusicNoteBeamed,
   BsFileEarmarkPerson,
 } from "react-icons/bs";
-import { SlArrowUp, SlArrowDown } from 'react-icons/sl';
+import { SlArrowUp, SlArrowDown } from "react-icons/sl";
 import "./NavBar.css";
 import { useState } from "react";
 
 const NavBar = () => {
-
   const [discoverDropdown, setDiscoverDropdown] = useState(false);
 
   const [todayDropdown, setTodayDropdown] = useState(false);
@@ -24,15 +23,15 @@ const NavBar = () => {
   const onClickDiscoverDropdown = (e) => {
     e.preventDefault();
     setDiscoverDropdown(discoverDropdown === true ? false : true);
-  }
+  };
 
   const onClickTodayDropdown = (e) => {
     e.preventDefault();
     setTodayDropdown(todayDropdown === true ? false : true);
-  }
+  };
 
   return (
-    <div style={{ position: "sticky", top: "0"}}>
+    <div style={{ position: "sticky", top: "0" }}>
       <div className="logo">
         <a href="#">
           <img src={logo} alt="Logo" className="logo-img"></img>
@@ -69,13 +68,14 @@ const NavBar = () => {
             <a href="/" onClick={onClickDiscoverDropdown}>
               <BsCompass style={{ color: "#FF9B2D !important" }} />
               <p className="icon-text">Khám Phá</p>
-              {discoverDropdown ?
-                <SlArrowUp className="arrow" /> :
+              {discoverDropdown ? (
+                <SlArrowUp className="arrow" />
+              ) : (
                 <SlArrowDown className="arrow" />
-              }
+              )}
             </a>
 
-            {discoverDropdown ?
+            {discoverDropdown ? (
               <ul
                 className="sub-discover"
                 style={{
@@ -87,34 +87,53 @@ const NavBar = () => {
                   zIndex: "1",
                 }}
               >
-                <li><a href="#">Bài Hát</a></li>
-                <li><a href="#">Playlist</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Nghệ Sỹ</a></li>
+                <li>
+                  <a href="#">Bài Hát</a>
+                </li>
+                <li>
+                  <a href="#">Playlist</a>
+                </li>
+                <li>
+                  <a href="#">Video</a>
+                </li>
+                <li>
+                  <a href="#">Nghệ Sỹ</a>
+                </li>
               </ul>
-              : <ul
+            ) : (
+              <ul
                 className="sub-discover"
                 style={{
-                  display: "none"
-                }}>
-                <li><a href="#">Bài Hát</a></li>
-                <li><a href="#">Playlist</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Nghệ Sỹ</a></li>
+                  display: "none",
+                }}
+              >
+                <li>
+                  <a href="#">Bài Hát</a>
+                </li>
+                <li>
+                  <a href="#">Playlist</a>
+                </li>
+                <li>
+                  <a href="#">Video</a>
+                </li>
+                <li>
+                  <a href="#">Nghệ Sỹ</a>
+                </li>
               </ul>
-            }
+            )}
           </li>
           <li>
             <a href="/" onClick={onClickTodayDropdown}>
               <BsMusicNoteBeamed style={{ color: "" }} />
               <p className="icon-text">Nghe gì hôm nay</p>
-              {todayDropdown ?
-                <SlArrowUp className="arrow" /> :
+              {todayDropdown ? (
+                <SlArrowUp className="arrow" />
+              ) : (
                 <SlArrowDown className="arrow" />
-              }
+              )}
             </a>
 
-            {todayDropdown ?
+            {todayDropdown ? (
               <ul
                 className="sub-discover"
                 style={{
@@ -126,20 +145,34 @@ const NavBar = () => {
                   zIndex: "1",
                 }}
               >
-                <li><a href="#">Chủ Đề</a></li>
-                <li><a href="#">Tuyển Tập</a></li>
-                <li><a href="#">Top 100</a></li>
+                <li>
+                  <a href="#">Chủ Đề</a>
+                </li>
+                <li>
+                  <a href="#">Tuyển Tập</a>
+                </li>
+                <li>
+                  <a href="#">Top 100</a>
+                </li>
               </ul>
-              : <ul
+            ) : (
+              <ul
                 className="sub-discover"
                 style={{
-                  display: "none"
-                }}>
-                <li><a href="#">Chủ Đề</a></li>
-                <li><a href="#">Tuyển Tập</a></li>
-                <li><a href="#">Top 100</a></li>
+                  display: "none",
+                }}
+              >
+                <li>
+                  <a href="#">Chủ Đề</a>
+                </li>
+                <li>
+                  <a href="#">Tuyển Tập</a>
+                </li>
+                <li>
+                  <a href="#">Top 100</a>
+                </li>
               </ul>
-            }
+            )}
           </li>
           <li>
             <a href="#">

@@ -3,9 +3,11 @@ import "./Playlist.css";
 
 const Playlist = ({ playlist: { src, title } }) => {
   return (
-    <div className="playlist" >
+    <div className="playlist">
       <img className="playlist-img" src={src} alt="Listimage" />
-      <a className="playlist-title" href="/" >{title}</a>
+      <a className="playlist-title" href="/">
+        {title}
+      </a>
     </div>
   );
 };

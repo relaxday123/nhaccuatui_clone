@@ -8,7 +8,6 @@ const slideStyles = {
   borderRadius: "10px",
   backgroundSize: "cover",
   backgroundPosition: "center",
-
 };
 
 const rightArrowStyles = {
@@ -85,7 +84,6 @@ const Slider = ({ slides }) => {
     return () => clearTimeout(timeoutId);
   }, [currentIndex, slides]);
 
-
   return (
     <div style={sliderStyles} className="slider-container">
       <div className="arrow">
@@ -96,9 +94,10 @@ const Slider = ({ slides }) => {
           ❱
         </div>
       </div>
-      <div style={slideStylesWidthBackground}
+      <div
+        style={slideStylesWidthBackground}
         //className={`autoskip-item ${currentIndex === currentIndex ? "show" : ""}`}
-        ></div>
+      ></div>
       <div style={dotsContainerStyles}>
         {slides.map((slide, slideIndex) => (
           <div
