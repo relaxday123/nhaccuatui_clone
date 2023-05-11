@@ -78,7 +78,6 @@
 } */
 
 .navbar {
-  margin-left: 10px;
   margin-top: 10px;
 }
 
@@ -89,7 +88,6 @@
   grid-template-columns: 1fr 10fr;
   grid-template-rows: 1fr;
   grid-column-gap: 10px;
-  padding: 5px 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -97,12 +95,16 @@
   font-weight: 500;
 }
 
-.navbar ul li a:hover {
-    
-}
-
 .navbar ul li ul li {
   opacity: 0.7;
+}
+
+.navbar > ul > li {
+  margin: 0.5em 0;
+}
+
+.navbar > ul > li:first-child {
+  margin-top: 1em;
 }
 
 .navbar .arrow {
@@ -124,6 +126,20 @@ a:active {
   opacity: 0.7;
   position: absolute;
   width: 202.35px;
+  padding: 5px;
+}
+
+.menu > li a {
+  padding-left: 20px;
+}
+
+.menu > li > a > :first-child {
+  font-size: 1.3em;
+}
+
+.menu > li > a > :nth-child(2) {
+  font-size: 0.9em;
+  font-weight: 500;
 }
 
 .menu li:hover ul {
@@ -134,13 +150,60 @@ a:active {
   z-index: 1;
 }
 
-/* .menu li ul li:hover::before {
+.menu li ul li:hover a::before {
   content: "•";
   color: #2daaed;
-  display:inline-block;
-} */
+  position: absolute;
+  left: 2.5em;
+}
 
 .menu ul li a {
   color: #b5babf;
   padding-left: 50px;
 }
+
+.menu > li > a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  display: block;
+  transition: all 0.3s ease;
+  /* bottom: 25%; */
+}
+.menu > li > a:hover::after {
+  width: 1.5px;
+  height: 80%;
+  background-color: #2daaed;
+}
+
+@keyframes inAnimation {
+  /* 0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  } */
+  0% {
+    transform: scaleY(0)
+}
+80% {
+    transform: scaleY(1.1)
+}
+100% {
+    transform: scaleY(1)
+}
+}
+
+@keyframes outAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+} 

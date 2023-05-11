@@ -27,8 +27,8 @@ const MainView = () => {
   ];
 
   const containerStyles = {
-    width: "82.5rem",
-    height: "33rem",
+    width: "58.5em",
+    height: "23.4em",
     margin: "0 auto",
     padding: "24px 0px",
   };
@@ -75,6 +75,31 @@ const MainView = () => {
           {lists.map((list) => {
             return <Playlist playlist={list} />;
           })}
+        </div>
+
+        <div className="new-realease">
+          <a href="/">Mới Phát Hành</a>
+          <div className="new-realease-info">
+            <img></img>
+            <div>
+              <a></a>
+              <div>
+                <img></img>
+                <a></a>
+              </div>
+              <div>
+                <i></i>
+                <p></p>
+              </div>
+            </div>
+            <a></a>
+          </div>
+
+          <div className="list" style={{ display: "flex" }}>
+            {lists.map((list) => {
+              return <Playlist playlist={list} />;
+            })}
+          </div>
         </div>
       </div>
     </>

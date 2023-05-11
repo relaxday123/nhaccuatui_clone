@@ -20,6 +20,14 @@ const NavBar = () => {
 
   const [todayDropdown, setTodayDropdown] = useState(false);
 
+  const mountedStyle = {
+    transition: "1s",
+  };
+  const unmountedStyle = {
+    animation: "outAnimation 270ms ease-in-out forwards",
+    animationFillMode: "forwards"
+  };
+
   const onClickDiscoverDropdown = (e) => {
     e.preventDefault();
     setDiscoverDropdown(discoverDropdown === true ? false : true);
@@ -75,52 +83,54 @@ const NavBar = () => {
               )}
             </a>
 
-            {discoverDropdown ? (
-              <ul
-                className="sub-discover"
-                style={{
-                  transition: "all .5s ease",
-                  height: "150px",
-                  opacity: "0.7",
-                  transform: "translateY(0)",
-                  display: "contents",
-                  zIndex: "1",
-                }}
-              >
-                <li>
-                  <a href="#">Bài Hát</a>
-                </li>
-                <li>
-                  <a href="#">Playlist</a>
-                </li>
-                <li>
-                  <a href="#">Video</a>
-                </li>
-                <li>
-                  <a href="#">Nghệ Sỹ</a>
-                </li>
-              </ul>
-            ) : (
-              <ul
-                className="sub-discover"
-                style={{
-                  display: "none",
-                }}
-              >
-                <li>
-                  <a href="#">Bài Hát</a>
-                </li>
-                <li>
-                  <a href="#">Playlist</a>
-                </li>
-                <li>
-                  <a href="#">Video</a>
-                </li>
-                <li>
-                  <a href="#">Nghệ Sỹ</a>
-                </li>
-              </ul>
-            )}
+            <div style={discoverDropdown ? mountedStyle : unmountedStyle}>
+              {discoverDropdown ? (
+                <ul
+                  className="sub-discover"
+                  style={{
+                    height: "150px",
+                    opacity: "0.7",
+                    transform: "translateY(0)",
+                    display: "contents",
+                    zIndex: "1",
+                    transition: "1s",
+                  }}
+                >
+                  <li>
+                    <a href="#">Bài Hát</a>
+                  </li>
+                  <li>
+                    <a href="#">Playlist</a>
+                  </li>
+                  <li>
+                    <a href="#">Video</a>
+                  </li>
+                  <li>
+                    <a href="#">Nghệ Sỹ</a>
+                  </li>
+                </ul>
+              ) : (
+                <ul
+                  className="sub-discover"
+                  style={{
+                    display: "none",
+                  }}
+                >
+                  <li>
+                    <a href="#">Bài Hát</a>
+                  </li>
+                  <li>
+                    <a href="#">Playlist</a>
+                  </li>
+                  <li>
+                    <a href="#">Video</a>
+                  </li>
+                  <li>
+                    <a href="#">Nghệ Sỹ</a>
+                  </li>
+                </ul>
+              )}
+            </div>
           </li>
           <li>
             <a href="/" onClick={onClickTodayDropdown}>
@@ -133,46 +143,48 @@ const NavBar = () => {
               )}
             </a>
 
-            {todayDropdown ? (
-              <ul
-                className="sub-discover"
-                style={{
-                  transition: "all .5s ease",
-                  height: "150px",
-                  opacity: "0.7",
-                  transform: "translateY(0)",
-                  display: "contents",
-                  zIndex: "1",
-                }}
-              >
-                <li>
-                  <a href="#">Chủ Đề</a>
-                </li>
-                <li>
-                  <a href="#">Tuyển Tập</a>
-                </li>
-                <li>
-                  <a href="#">Top 100</a>
-                </li>
-              </ul>
-            ) : (
-              <ul
-                className="sub-discover"
-                style={{
-                  display: "none",
-                }}
-              >
-                <li>
-                  <a href="#">Chủ Đề</a>
-                </li>
-                <li>
-                  <a href="#">Tuyển Tập</a>
-                </li>
-                <li>
-                  <a href="#">Top 100</a>
-                </li>
-              </ul>
-            )}
+            <div style={todayDropdown ? mountedStyle : unmountedStyle}>
+              {todayDropdown ? (
+                <ul
+                  className="sub-discover"
+                  style={{
+                    transition: "all .5s ease",
+                    height: "150px",
+                    opacity: "0.7",
+                    transform: "translateY(0)",
+                    display: "contents",
+                    zIndex: "1",
+                  }}
+                >
+                  <li>
+                    <a href="#">Chủ Đề</a>
+                  </li>
+                  <li>
+                    <a href="#">Tuyển Tập</a>
+                  </li>
+                  <li>
+                    <a href="#">Top 100</a>
+                  </li>
+                </ul>
+              ) : (
+                <ul
+                  className="sub-discover"
+                  style={{
+                    display: "none",
+                  }}
+                >
+                  <li>
+                    <a href="#">Chủ Đề</a>
+                  </li>
+                  <li>
+                    <a href="#">Tuyển Tập</a>
+                  </li>
+                  <li>
+                    <a href="#">Top 100</a>
+                  </li>
+                </ul>
+              )}
+            </div>
           </li>
           <li>
             <a href="#">

@@ -15,6 +15,8 @@ import DisplayTrack from "./DisplayTrack";
 import { useRef, useState, useEffect } from "react";
 import { tracks } from "../media/mp3/tracks";
 
+import { getData } from "../httpClient/endPoints";
+
 const NowPlaying = ({ list }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
@@ -53,6 +55,28 @@ const NowPlaying = ({ list }) => {
       audioRef.current.muted = muteVolume;
     }
   }, [volume, audioRef, muteVolume]);
+
+  const axios = require('axios');
+
+  const [data, setData] = useState([]);
+
+  const options = {
+    method: 'GET',
+    url: 'https://theaudiodb.p.rapidapi.com/searchalbum.php',
+    params: { s: 'daft_punk' },
+    headers: {
+      'X-RapidAPI-Key': 'bc9c950a49mshb7946e239311423p178408jsn57dbdd53e8f6',
+      'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
+    }
+  };
+
+  useEffect(() => {
+    getData().then(function (response) {
+      setData(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
 
   return (
     <div

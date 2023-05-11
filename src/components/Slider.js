@@ -40,15 +40,32 @@ const sliderStyles = {
 };
 
 const dotsContainerStyles = {
+  paddingTop: "1em",
   display: "flex",
   justifyContent: "center",
 };
 
 const dotStyle = {
+  backgroundColor: "#323b45",
   margin: "0 3px",
   cursor: "pointer",
-  fontSize: "20px",
+  fontSize: "1em",
+  width: "0.4em",
+  height: "0.4em",
+  borderRadius: "0.4em",
+  transition: ".2s ease-out"
 };
+
+const currentDotStyle = {
+  backgroundColor: "#2daaed",
+  margin: "0 3px",
+  cursor: "pointer",
+  fontSize: "1em",
+  width: "1.2em",
+  height: "0.4em",
+  borderRadius: "0.4em",
+  transition: ".2s ease-in"
+}
 
 const Slider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -96,19 +113,30 @@ const Slider = ({ slides }) => {
       </div>
       <div
         style={slideStylesWidthBackground}
-        //className={`autoskip-item ${currentIndex === currentIndex ? "show" : ""}`}
+      //className={`autoskip-item ${currentIndex === currentIndex ? "show" : ""}`}
       ></div>
       <div style={dotsContainerStyles}>
-        {slides.map((slide, slideIndex) => (
-          <div
-            className="content"
-            style={dotStyle}
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-          >
-            ●
-          </div>
-        ))}
+        {slides.map((slide, slideIndex) =>
+          {if (slideIndex === currentIndex)
+              return (
+                <div
+                  className="content"
+                  style={currentDotStyle}
+                  key={slideIndex}
+                  onClick={() => goToSlide(slideIndex)}
+                >
+                </div>)
+            else
+              return (
+                <div
+                  className="content"
+                  style={dotStyle}
+                  key={slideIndex}
+                  onClick={() => goToSlide(slideIndex)}
+                >
+                </div>)
+          }
+        )}
       </div>
     </div>
   );
