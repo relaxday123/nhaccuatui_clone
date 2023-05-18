@@ -21,9 +21,9 @@ const Controls = ({
   setTrackIndex,
   setCurrentTrack,
   handleNext,
+  isPlaying,
+  setIsPlaying
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };

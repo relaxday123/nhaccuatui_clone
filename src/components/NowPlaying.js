@@ -17,6 +17,10 @@ import { tracks } from "../media/mp3/tracks";
 
 import { getData } from "../httpClient/endPoints";
 
+import { SlArrowUp, SlArrowDown } from "react-icons/sl";
+import { BiHeadphone } from "react-icons/bi";
+import { FaPause, FaPlay } from "react-icons/fa";
+
 const NowPlaying = ({ list }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
@@ -57,9 +61,7 @@ const NowPlaying = ({ list }) => {
   }, [volume, audioRef, muteVolume]);
 
   const axios = require('axios');
-
   const [data, setData] = useState([]);
-
   const options = {
     method: 'GET',
     url: 'https://theaudiodb.p.rapidapi.com/searchalbum.php',
@@ -77,6 +79,18 @@ const NowPlaying = ({ list }) => {
     });
   }, []);
 
+  const [listSong, setListSong] = useState(false);
+
+  const handleListSong = (e) => {
+    setListSong(listSong === true ? false : true);
+  }
+
+  const handleSelectSong = (e, item) => {
+    e.preventDefault();
+    setCurrentTrack(item);
+  }
+
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <div
@@ -89,81 +103,128 @@ const NowPlaying = ({ list }) => {
         justifyContent: "space-between",
       }}
     >
-      <div
-        style={{
-          padding: "0 0.7rem",
-        }}
-      >
-        <div
+      {listSong ?
+        (<div>
+          <div className="now-playing-header">
+            <p className="now-playing-content">Đang phát</p>
+            <SlArrowDown className="now-playing-arrow" onClick={handleListSong} />
+          </div>
+          <div className="now-playing-song">
+            <div className="now-playing-song-info">
+              <div className="now-playing-song-info-pic">
+                <img src={pic} alt="now-playing-song"></img>
+                {isPlaying ? (
+                  <FaPause className="now-playing-song-info-pic-ic" />
+                ) : (
+                  <FaPlay className="now-playing-song-info-pic-ic" />
+                )}
+              </div>
+              <div>
+                <p style={{ display: "block", fontSize: "14px", fontWeight: "600" }}>{currentTrack.title}</p>
+                <div style={{ marginTop: "0.5em", fontSize: "1em" }}>
+                  {currentTrack.author
+                    .map((artirt, index) => (
+                      <>
+                        <a href="/">{artirt}</a>
+                        {index !== currentTrack.author.length - 1 && <span>, </span>}
+                      </>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="heard-number">
+                <BiHeadphone />
+                {currentTrack.heardNumber}
+              </div>
+              <div className="song-more-ic">
+                <SlOptionsVertical />
+              </div>
+            </div>
+          </div>
+          <div className="song-list-wrapper">
+            <p className="song-list">Danh sách bài hát</p>
+            <br />
+            {
+              tracks.map((song, index) => {
+                return (
+                  <div className="song" key={index} onClick={(event) => handleSelectSong(event, song)}>
+                    <div className="song-info">
+                      <p>{song.title}</p>
+                      {song.author
+                        .map((artirt, index) => (
+                          <>
+                            <a href="/">{artirt}</a>
+                            {index !== song.author.length - 1 && <span>, </span>}
+                          </>
+                        ))
+                      }
+                    </div>
+                    <div className="heard-number">
+                      <BiHeadphone />
+                      {song.heardNumber}
+                    </div>
+                    <div className="song-more-ic">
+                      <SlOptionsVertical />
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>)
+        : (<div
           style={{
-            position: "relative",
-            textAlign: "center",
-            height: "295px",
-            padding: "12px 0",
-            margin: "16px 16px",
-            backgroundColor: "#232d37",
-            borderRadius: "5px",
+            padding: "0 0.7rem",
           }}
         >
-          <img
-            style={{ width: "240px", height: "240px" }}
-            src={pic}
-            alt="NP-img"
-          />
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "5px 16px",
+              position: "relative",
+              textAlign: "center",
+              height: "295px",
+              padding: "12px 0",
+              margin: "16px 16px",
               backgroundColor: "#232d37",
+              borderRadius: "5px",
             }}
           >
-            <a
-              href="/"
-              style={{ display: "block", backgroundColor: "#232d37" }}
-              className="song-name"
-            >
-              nếu lúc đó
-            </a>
-            <a
-              href="/"
-              className="karaokeic"
-              style={{ backgroundColor: "#232d37" }}
-            >
-              <TfiMicrophoneAlt style={{ backgroundColor: "#232d37" }} />
-            </a>
+            <img
+              style={{ width: "240px", height: "240px", }}
+              src={pic}
+              alt="NP-img"
+            />
+            <div style={{ backgroundColor: "inherit", textAlign: "left", paddingLeft: "0.8em" }}>
+              <a href="/" style={{ backgroundColor: "inherit", display: "block", paddingTop: "0.5em", fontSize: "14px", fontWeight: "600" }}>{currentTrack.title}</a>
+              <div style={{ backgroundColor: "inherit", paddingTop: "0.5em", fontSize: "0.8em" }}>
+                {currentTrack.author
+                  .map((artirt, index) => (
+                    <>
+                      <a href="/" style={{ backgroundColor: "inherit", marginTop: "0.5em" }}>{artirt}</a>
+                      {index !== currentTrack.author.length - 1 && <span style={{ backgroundColor: "inherit" }}>, </span>}
+                    </>
+                  ))
+                }
+              </div>
+              <a
+                href="/"
+                className="karaokeic"
+                style={{ backgroundColor: "#232d37", position: "absolute", right: "0.8em", bottom: "2em" }}
+              >
+                <TfiMicrophoneAlt style={{ backgroundColor: "#232d37" }} />
+              </a>
+            </div>
           </div>
           <div
-            style={{
-              position: "absolute",
-              left: "16px",
-              backgroundColor: "inherit",
-            }}
+            className="albumname"
+            style={{ fontSize: "13px", textAlign: "center" }}
           >
-            <a
-              className="artistname"
-              href="/"
-              style={{ backgroundColor: "inherit" }}
-            >
-              Tlinh
-            </a>
-            {", "}
-            <a
-              className="artistname"
-              href="/"
-              style={{ backgroundColor: "inherit" }}
-            >
-              2pillz
-            </a>
+            Playlist: Bảng Xếp Hạng Bài Hát Việt Nam ...
           </div>
-        </div>
-        <div
-          className="albumname"
-          style={{ fontSize: "13px", textAlign: "center" }}
-        >
-          Playlist: Bảng Xếp Hạng Bài Hát Việt Nam ...
-        </div>
-      </div>
+        </div>)
+      }
+
       <div className="songcontrol" style={{ position: "relative" }}>
         <div
           style={{
@@ -200,7 +261,7 @@ const NowPlaying = ({ list }) => {
               />
             </div>
           </div>
-          <button class="button-18">Danh sách phát</button>
+          <button onClick={handleListSong} class="button-18">{listSong ? "Danh sách phát" : "Đang phát"}</button>
           <SlOptionsVertical />
         </div>
         <ProgressBar
@@ -226,6 +287,8 @@ const NowPlaying = ({ list }) => {
             setTrackIndex,
             setCurrentTrack,
             handleNext,
+            isPlaying,
+            setIsPlaying
           }}
         />
         <div>
