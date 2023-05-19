@@ -1,21 +1,81 @@
 .playlist {
-    padding: 10px;
+  padding: 10px;
 }
 
 .playlist .playlist-img {
-    width: 205px;
-    height: 205px;
-    border-radius: 5px;
-    display: block;
+  width: 205px;
+  height: 205px;
+  border-radius: 5px;
+  display: block;
+  transition: transform 0.2s;
 }
 
 .playlist .playlist-title {
-    padding-top: 10px;
-    font-weight: 700;
-    font-size: 15px;
-    display: block;
+  padding-top: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  display: block;
 }
 
 .playlist .playlist-title:hover {
-    color: #2daaed;
+  color: #2daaed;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  opacity: 0;
+}
+
+.more-ic * {
+  color: white;
+  visibility: hidden;
+}
+
+.play-ic * {
+  background-color: transparent;
+  color: white;
+  visibility: hidden;
+  transition: transform 0.3s ease;
+}
+
+.playlist div:hover .playlist-img {
+  transform: scale(1.1);
+  border-radius: 5px;
+}
+
+.playlist div:hover {
+  border-radius: 5px;
+}
+
+.playlist-img:hover .overlay {
+  opacity: .5;
+}
+
+.playlist div:hover .overlay {
+  opacity: .5;
+}
+
+.playlist div:hover .overlay {
+  opacity: .5;
+}
+
+.playlist div:hover .more-ic * {
+  visibility: visible;
+  opacity: 1;
+  color: white;
+}
+
+.playlist div:hover .play-ic * {
+  visibility: visible;
+  opacity: 1;
+  color: white;
+}
+
+.play-ic *:hover {
+  transform: scale(1.2);
 }

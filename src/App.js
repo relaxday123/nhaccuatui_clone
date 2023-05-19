@@ -10,12 +10,21 @@ function App() {
   return (
     <>
       <Container>
-        <Row style={{display:"grid", gridTemplateColumns: "13% 66% 21%"}}>
+        <Row style={{ display: "grid", gridTemplateColumns: "11fr 72fr 17fr" }}>
           <Col>
             <NavBar />
           </Col>
-          <Col style={{ borderLeft: "0.5px solid rgba(181, 186, 191, .1)", borderRight: "0.5px solid rgba(181, 186, 191, .1)" }}><MainView /></Col>
-          <Col><NowPlaying /></Col>
+          <Col
+            style={{
+              borderLeft: "0.5px solid rgba(181, 186, 191, .1)",
+              borderRight: "0.5px solid rgba(181, 186, 191, .1)",
+            }}
+          >
+            <MainView />
+          </Col>
+          <Col>
+            <NowPlaying />
+          </Col>
         </Row>
       </Container>
     </>

@@ -53,7 +53,7 @@ const dotStyle = {
   width: "0.4em",
   height: "0.4em",
   borderRadius: "0.4em",
-  transition: ".2s ease-out"
+  transition: ".2s ease-out",
 };
 
 const currentDotStyle = {
@@ -64,8 +64,8 @@ const currentDotStyle = {
   width: "1.2em",
   height: "0.4em",
   borderRadius: "0.4em",
-  transition: ".2s ease-in"
-}
+  transition: ".2s ease-in",
+};
 
 const Slider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,7 +88,7 @@ const Slider = ({ slides }) => {
     backgroundImage: `url(${slides[currentIndex].url})`,
     opacity: "1",
     visibility: "visible",
-    transition: "0s",
+    transition: "0.3s ease",
   };
 
   useEffect(() => {
@@ -111,32 +111,28 @@ const Slider = ({ slides }) => {
           ❱
         </div>
       </div>
-      <div
-        style={slideStylesWidthBackground}
-      //className={`autoskip-item ${currentIndex === currentIndex ? "show" : ""}`}
-      ></div>
+      <div style={slideStylesWidthBackground}></div>
       <div style={dotsContainerStyles}>
-        {slides.map((slide, slideIndex) =>
-          {if (slideIndex === currentIndex)
-              return (
-                <div
-                  className="content"
-                  style={currentDotStyle}
-                  key={slideIndex}
-                  onClick={() => goToSlide(slideIndex)}
-                >
-                </div>)
-            else
-              return (
-                <div
-                  className="content"
-                  style={dotStyle}
-                  key={slideIndex}
-                  onClick={() => goToSlide(slideIndex)}
-                >
-                </div>)
-          }
-        )}
+        {slides.map((slide, slideIndex) => {
+          if (slideIndex === currentIndex)
+            return (
+              <div
+                className="content"
+                style={currentDotStyle}
+                key={slideIndex}
+                onClick={() => goToSlide(slideIndex)}
+              ></div>
+            );
+          else
+            return (
+              <div
+                className="content"
+                style={dotStyle}
+                key={slideIndex}
+                onClick={() => goToSlide(slideIndex)}
+              ></div>
+            );
+        })}
       </div>
     </div>
   );

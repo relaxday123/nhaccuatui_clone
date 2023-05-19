@@ -8,9 +8,8 @@ import pic5 from "../media/img/TodaySongs/5.jpg";
 import piclist1 from "../media/img/Square/1.jpg";
 import piclist2 from "../media/img/Square/2.jpg";
 import piclist3 from "../media/img/Square/3.jpg";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import Playlist from "./Playlist";
 import "./MainView.css";
+import Album from "./Album";
 
 const MainView = () => {
   const slides = [
@@ -27,8 +26,8 @@ const MainView = () => {
   ];
 
   const containerStyles = {
-    width: "58.5em",
-    height: "23.4em",
+    width: "83em",
+    height: "33.2em",
     margin: "0 auto",
     padding: "24px 0px",
   };
@@ -39,69 +38,8 @@ const MainView = () => {
         <Slider slides={slides} />
       </div>
 
-      <div className="lazyload-wrapper">
-        <div className="playlist-subject">
-          <p>Giai Điệu Gây Nghiện</p>
-          <div style={{ display: "inline" }}>
-            <a href="/" className="left-arrow">
-              <AiOutlineArrowLeft />
-            </a>
-            <a href="/" className="right-arrow">
-              <AiOutlineArrowRight />
-            </a>
-          </div>
-        </div>
-        <div className="list">
-          {lists.map((list) => {
-            return <Playlist playlist={list} />;
-          })}
-        </div>
-      </div>
-
-      <div className="lazyload-wrapper">
-        <div className="playlist-subject">
-          <p>Đang Thịnh Hành</p>
-          <div style={{ display: "inline" }}>
-            <a href="/" className="left-arrow">
-              <AiOutlineArrowLeft />
-            </a>
-            <a href="/" className="right-arrow">
-              <AiOutlineArrowRight />
-            </a>
-          </div>
-        </div>
-
-        <div className="list" style={{ display: "flex" }}>
-          {lists.map((list) => {
-            return <Playlist playlist={list} />;
-          })}
-        </div>
-
-        <div className="new-realease">
-          <a href="/">Mới Phát Hành</a>
-          <div className="new-realease-info">
-            <img></img>
-            <div>
-              <a></a>
-              <div>
-                <img></img>
-                <a></a>
-              </div>
-              <div>
-                <i></i>
-                <p></p>
-              </div>
-            </div>
-            <a></a>
-          </div>
-
-          <div className="list" style={{ display: "flex" }}>
-            {lists.map((list) => {
-              return <Playlist playlist={list} />;
-            })}
-          </div>
-        </div>
-      </div>
+      <Album title="Đang Thịnh Hành" lists={lists} />
+      <Album title="Giai Điệu Gây Nghiện" lists={lists} />
     </>
   );
 };

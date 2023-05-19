@@ -17,7 +17,7 @@ import { tracks } from "../media/mp3/tracks";
 
 import { getData } from "../httpClient/endPoints";
 
-import { SlArrowUp, SlArrowDown } from "react-icons/sl";
+import { SlArrowDown } from "react-icons/sl";
 import { BiHeadphone } from "react-icons/bi";
 import { FaPause, FaPlay } from "react-icons/fa";
 
@@ -45,14 +45,6 @@ const NowPlaying = ({ list }) => {
     }
   };
 
-  const onMouseEnter = (e) => {
-    //setVolume(true);
-  };
-
-  const onMouseLeave = (e) => {
-    //setVolume(false);
-  };
-
   useEffect(() => {
     if (audioRef) {
       audioRef.current.volume = volume / 100;
@@ -60,16 +52,16 @@ const NowPlaying = ({ list }) => {
     }
   }, [volume, audioRef, muteVolume]);
 
-  const axios = require('axios');
+  const axios = require("axios");
   const [data, setData] = useState([]);
   const options = {
-    method: 'GET',
-    url: 'https://theaudiodb.p.rapidapi.com/searchalbum.php',
-    params: { s: 'daft_punk' },
+    method: "GET",
+    url: "https://theaudiodb.p.rapidapi.com/searchalbum.php",
+    params: { s: "daft_punk" },
     headers: {
-      'X-RapidAPI-Key': 'bc9c950a49mshb7946e239311423p178408jsn57dbdd53e8f6',
-      'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
-    }
+      "X-RapidAPI-Key": "bc9c950a49mshb7946e239311423p178408jsn57dbdd53e8f6",
+      "X-RapidAPI-Host": "theaudiodb.p.rapidapi.com",
+    },
   };
 
   useEffect(() => {
@@ -83,12 +75,12 @@ const NowPlaying = ({ list }) => {
 
   const handleListSong = (e) => {
     setListSong(listSong === true ? false : true);
-  }
+  };
 
   const handleSelectSong = (e, item) => {
     e.preventDefault();
     setCurrentTrack(item);
-  }
+  };
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -103,11 +95,14 @@ const NowPlaying = ({ list }) => {
         justifyContent: "space-between",
       }}
     >
-      {listSong ?
-        (<div>
+      {listSong ? (
+        <div>
           <div className="now-playing-header">
             <p className="now-playing-content">Đang phát</p>
-            <SlArrowDown className="now-playing-arrow" onClick={handleListSong} />
+            <SlArrowDown
+              className="now-playing-arrow"
+              onClick={handleListSong}
+            />
           </div>
           <div className="now-playing-song">
             <div className="now-playing-song-info">
@@ -120,16 +115,24 @@ const NowPlaying = ({ list }) => {
                 )}
               </div>
               <div>
-                <p style={{ display: "block", fontSize: "14px", fontWeight: "600" }}>{currentTrack.title}</p>
+                <p
+                  style={{
+                    display: "block",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                  }}
+                >
+                  {currentTrack.title}
+                </p>
                 <div style={{ marginTop: "0.5em", fontSize: "1em" }}>
-                  {currentTrack.author
-                    .map((artirt, index) => (
-                      <>
-                        <a href="/">{artirt}</a>
-                        {index !== currentTrack.author.length - 1 && <span>, </span>}
-                      </>
-                    ))
-                  }
+                  {currentTrack.author.map((artirt, index) => (
+                    <>
+                      <a href="/">{artirt}</a>
+                      {index !== currentTrack.author.length - 1 && (
+                        <span>, </span>
+                      )}
+                    </>
+                  ))}
                 </div>
               </div>
             </div>
@@ -145,36 +148,37 @@ const NowPlaying = ({ list }) => {
           </div>
           <div className="song-list-wrapper">
             <p className="song-list">Danh sách bài hát</p>
-            <br />
-            {
-              tracks.map((song, index) => {
-                return (
-                  <div className="song" key={index} onClick={(event) => handleSelectSong(event, song)}>
-                    <div className="song-info">
-                      <p>{song.title}</p>
-                      {song.author
-                        .map((artirt, index) => (
-                          <>
-                            <a href="/">{artirt}</a>
-                            {index !== song.author.length - 1 && <span>, </span>}
-                          </>
-                        ))
-                      }
-                    </div>
-                    <div className="heard-number">
-                      <BiHeadphone />
-                      {song.heardNumber}
-                    </div>
-                    <div className="song-more-ic">
-                      <SlOptionsVertical />
-                    </div>
+            <hr style={{ margin: "0.5em 1.5 em 0", opacity: ".1", display: "flex" , justifyContent: "center" , alignItems: "center"}} />
+            {tracks.map((song, index) => {
+              return (
+                <div
+                  className="song"
+                  key={index}
+                  onClick={(event) => handleSelectSong(event, song)}
+                >
+                  <div className="song-info">
+                    <p>{song.title}</p>
+                    {song.author.map((artirt, index) => (
+                      <>
+                        <a href="/">{artirt}</a>
+                        {index !== song.author.length - 1 && <span>, </span>}
+                      </>
+                    ))}
                   </div>
-                )
-              })
-            }
+                  <div className="heard-number">
+                    <BiHeadphone />
+                    {song.heardNumber}
+                  </div>
+                  <div className="song-more-ic">
+                    <SlOptionsVertical />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>)
-        : (<div
+        </div>
+      ) : (
+        <div
           style={{
             padding: "0 0.7rem",
           }}
@@ -191,26 +195,59 @@ const NowPlaying = ({ list }) => {
             }}
           >
             <img
-              style={{ width: "240px", height: "240px", }}
+              style={{ width: "240px", height: "240px" }}
               src={pic}
               alt="NP-img"
             />
-            <div style={{ backgroundColor: "inherit", textAlign: "left", paddingLeft: "0.8em" }}>
-              <a href="/" style={{ backgroundColor: "inherit", display: "block", paddingTop: "0.5em", fontSize: "14px", fontWeight: "600" }}>{currentTrack.title}</a>
-              <div style={{ backgroundColor: "inherit", paddingTop: "0.5em", fontSize: "0.8em" }}>
-                {currentTrack.author
-                  .map((artirt, index) => (
-                    <>
-                      <a href="/" style={{ backgroundColor: "inherit", marginTop: "0.5em" }}>{artirt}</a>
-                      {index !== currentTrack.author.length - 1 && <span style={{ backgroundColor: "inherit" }}>, </span>}
-                    </>
-                  ))
-                }
+            <div
+              style={{
+                backgroundColor: "inherit",
+                textAlign: "left",
+                paddingLeft: "0.8em",
+              }}
+            >
+              <a
+                href="/"
+                style={{
+                  backgroundColor: "inherit",
+                  display: "block",
+                  paddingTop: "0.5em",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                }}
+              >
+                {currentTrack.title}
+              </a>
+              <div
+                style={{
+                  backgroundColor: "inherit",
+                  paddingTop: "0.5em",
+                  fontSize: "0.8em",
+                }}
+              >
+                {currentTrack.author.map((artirt, index) => (
+                  <>
+                    <a
+                      href="/"
+                      style={{ backgroundColor: "inherit", marginTop: "0.5em" }}
+                    >
+                      {artirt}
+                    </a>
+                    {index !== currentTrack.author.length - 1 && (
+                      <span style={{ backgroundColor: "inherit" }}>, </span>
+                    )}
+                  </>
+                ))}
               </div>
               <a
                 href="/"
                 className="karaokeic"
-                style={{ backgroundColor: "#232d37", position: "absolute", right: "0.8em", bottom: "2em" }}
+                style={{
+                  backgroundColor: "#232d37",
+                  position: "absolute",
+                  right: "0.8em",
+                  bottom: "2em",
+                }}
               >
                 <TfiMicrophoneAlt style={{ backgroundColor: "#232d37" }} />
               </a>
@@ -222,8 +259,8 @@ const NowPlaying = ({ list }) => {
           >
             Playlist: Bảng Xếp Hạng Bài Hát Việt Nam ...
           </div>
-        </div>)
-      }
+        </div>
+      )}
 
       <div className="songcontrol" style={{ position: "relative" }}>
         <div
@@ -261,7 +298,9 @@ const NowPlaying = ({ list }) => {
               />
             </div>
           </div>
-          <button onClick={handleListSong} class="button-18">{listSong ? "Danh sách phát" : "Đang phát"}</button>
+          <button onClick={handleListSong} class="button-18">
+            {listSong ? "Danh sách phát" : "Đang phát"}
+          </button>
           <SlOptionsVertical />
         </div>
         <ProgressBar
@@ -288,7 +327,7 @@ const NowPlaying = ({ list }) => {
             setCurrentTrack,
             handleNext,
             isPlaying,
-            setIsPlaying
+            setIsPlaying,
           }}
         />
         <div>
