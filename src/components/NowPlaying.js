@@ -14,6 +14,7 @@ import ProgressBar from "./ProgressBar";
 import DisplayTrack from "./DisplayTrack";
 import { useRef, useState, useEffect } from "react";
 import { tracks } from "../media/mp3/tracks";
+import songs from "../media/mp3/songs.json";
 
 import { getData } from "../httpClient/endPoints";
 
@@ -24,7 +25,7 @@ import { FaPause, FaPlay } from "react-icons/fa";
 const NowPlaying = ({ list }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+  const [currentTrack, setCurrentTrack] = useState(songs[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -71,7 +72,7 @@ const NowPlaying = ({ list }) => {
     });
   }, []);
 
-  const [listSong, setListSong] = useState(false);
+  const [listSong, setListSong] = useState(true);
 
   const handleListSong = (e) => {
     setListSong(listSong === true ? false : true);
@@ -107,7 +108,7 @@ const NowPlaying = ({ list }) => {
           <div className="now-playing-song">
             <div className="now-playing-song-info">
               <div className="now-playing-song-info-pic">
-                <img src={pic} alt="now-playing-song"></img>
+                <img src={currentTrack.links.images[0].src} alt="now-playing-song"></img>
                 {isPlaying ? (
                   <FaPause className="now-playing-song-info-pic-ic" />
                 ) : (
@@ -120,19 +121,24 @@ const NowPlaying = ({ list }) => {
                     display: "block",
                     fontSize: "14px",
                     fontWeight: "600",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "13em",
                   }}
                 >
                   {currentTrack.title}
                 </p>
                 <div style={{ marginTop: "0.5em", fontSize: "1em" }}>
-                  {currentTrack.author.map((artirt, index) => (
+                  {currentTrack.author}
+                  {/* {currentTrack.author.map((artirt, index) => (
                     <>
                       <a href="/">{artirt}</a>
                       {index !== currentTrack.author.length - 1 && (
                         <span>, </span>
                       )}
                     </>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </div>
@@ -148,33 +154,56 @@ const NowPlaying = ({ list }) => {
           </div>
           <div className="song-list-wrapper">
             <p className="song-list">Danh sách bài hát</p>
-            <hr style={{ margin: "0.5em 1.5 em 0", opacity: ".1", display: "flex" , justifyContent: "center" , alignItems: "center"}} />
-            {tracks.map((song, index) => {
-              return (
-                <div
-                  className="song"
-                  key={index}
-                  onClick={(event) => handleSelectSong(event, song)}
-                >
-                  <div className="song-info">
-                    <p>{song.title}</p>
-                    {song.author.map((artirt, index) => (
+            <hr
+              style={{
+                margin: "0.5em 1.5 em 0",
+                opacity: ".1",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            />
+            <div
+              className="song-list-scroll"
+              style={{ height: "38em", overflow: "scroll" }}
+            >
+              {songs.map((song, index) => {
+                return (
+                  <div
+                    className="song"
+                    key={index}
+                    onClick={(event) => handleSelectSong(event, song)}
+                  >
+                    <div className="song-info">
+                      <p
+                        style={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          width: "18em",
+                        }}
+                      >
+                        {song.title}
+                      </p>
+                      {song.author}
+                      {/* {song.author.map((artirt, index) => (
                       <>
                         <a href="/">{artirt}</a>
                         {index !== song.author.length - 1 && <span>, </span>}
                       </>
-                    ))}
+                    ))} */}
+                    </div>
+                    <div className="heard-number">
+                      <BiHeadphone />
+                      {song.heardNumber}
+                    </div>
+                    <div className="song-more-ic">
+                      <SlOptionsVertical />
+                    </div>
                   </div>
-                  <div className="heard-number">
-                    <BiHeadphone />
-                    {song.heardNumber}
-                  </div>
-                  <div className="song-more-ic">
-                    <SlOptionsVertical />
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (
@@ -195,8 +224,13 @@ const NowPlaying = ({ list }) => {
             }}
           >
             <img
-              style={{ width: "240px", height: "240px" }}
-              src={pic}
+              style={{
+                width: "240px",
+                height: "240px",
+                borderRadius: "0.4rem",
+                boxShadow: "0 8px 16px rgb(0,0,0,0.2)",
+              }}
+              src={currentTrack.links.images[0].src}
               alt="NP-img"
             />
             <div
@@ -214,6 +248,10 @@ const NowPlaying = ({ list }) => {
                   paddingTop: "0.5em",
                   fontSize: "14px",
                   fontWeight: "600",
+                  width: "13em",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {currentTrack.title}
@@ -225,7 +263,8 @@ const NowPlaying = ({ list }) => {
                   fontSize: "0.8em",
                 }}
               >
-                {currentTrack.author.map((artirt, index) => (
+                {currentTrack.author}
+                {/* {currentTrack.author.map((artirt, index) => (
                   <>
                     <a
                       href="/"
@@ -237,7 +276,7 @@ const NowPlaying = ({ list }) => {
                       <span style={{ backgroundColor: "inherit" }}>, </span>
                     )}
                   </>
-                ))}
+                ))} */}
               </div>
               <a
                 href="/"

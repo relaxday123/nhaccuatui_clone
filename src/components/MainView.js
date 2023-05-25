@@ -10,6 +10,7 @@ import piclist2 from "../media/img/Square/2.jpg";
 import piclist3 from "../media/img/Square/3.jpg";
 import "./MainView.css";
 import Album from "./Album";
+import Footer from "./Footer";
 
 const MainView = () => {
   const slides = [
@@ -40,6 +41,8 @@ const MainView = () => {
 
       <Album title="Đang Thịnh Hành" lists={lists} />
       <Album title="Giai Điệu Gây Nghiện" lists={lists} />
+      
+      <Footer />
     </>
   );
 };
