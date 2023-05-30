@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 import {
   BsShuffle,
@@ -16,13 +16,16 @@ const Controls = ({
   progressBarRef,
   duration,
   setTimeProgress,
-  tracks,
+  Songs,
   trackIndex,
   setTrackIndex,
   setCurrentTrack,
   handleNext,
   isPlaying,
-  setIsPlaying
+  setIsPlaying,
+  isShuffle,
+  handleShuffle,
+  handleRepeat,
 }) => {
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
@@ -51,22 +54,14 @@ const Controls = ({
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, audioRef, repeat]);
 
-  const skipForward = () => {
-    audioRef.current.currentTime += 15;
-  };
-
-  const skipBackward = () => {
-    audioRef.current.currentTime -= 15;
-  };
-
   const handlePrevious = () => {
     if (trackIndex === 0) {
-      let lastTrackIndex = tracks.length - 1;
+      let lastTrackIndex = Songs.length - 1;
       setTrackIndex(lastTrackIndex);
-      setCurrentTrack(tracks[lastTrackIndex]);
+      setCurrentTrack(Songs[lastTrackIndex]);
     } else {
       setTrackIndex((prev) => prev - 1);
-      setCurrentTrack(tracks[trackIndex - 1]);
+      setCurrentTrack(Songs[trackIndex - 1]);
     }
   };
 
@@ -80,10 +75,14 @@ const Controls = ({
           justifyContent: "space-evenly",
         }}
       >
-        <button className="shufflebtn smallbtn" onClick={handlePrevious}>
-          <BsShuffle style={{ fontSize: "18px" }} />
+        <button className="shufflebtn smallbtn" onClick={handleShuffle}>
+          {isShuffle ? (
+            <BsShuffle className="shuffle-btn" style={{ fontSize: "18px" }} />
+          ) : (
+            <BsShuffle style={{ fontSize: "18px" }} />
+          )}
         </button>
-        <button className="skipbwbtn smallbtn" onClick={skipBackward}>
+        <button className="skipbwbtn smallbtn" onClick={handlePrevious}>
           <BsFillSkipBackwardFill style={{ fontSize: "18px" }} />
         </button>
 
@@ -94,10 +93,10 @@ const Controls = ({
             <FaPlay style={{ fontSize: "30px" }} />
           )}
         </button>
-        <button className="skipfwbtn smallbtn" onClick={skipForward}>
+        <button className="skipfwbtn smallbtn" onClick={handleNext}>
           <BsFillSkipForwardFill style={{ fontSize: "18px" }} />
         </button>
-        <button className="repeatbtn smallbtn" onClick={handleNext}>
+        <button className="repeatbtn smallbtn" onClick={handleRepeat}>
           <BsRepeat style={{ fontSize: "18px" }} />
         </button>
       </div>

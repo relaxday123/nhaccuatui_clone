@@ -29,3 +29,7 @@
 .controls-wrapper .controls button * {
     background-color: inherit;
 }
+
+.shuffle-btn * {
+    color: #2daaed;
+}

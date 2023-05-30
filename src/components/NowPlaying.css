@@ -110,7 +110,11 @@
 .now-playing-header {
   display: flex;
   justify-content: space-between;
-  padding: 1em 1.5em 0;
+  padding: 1.5em 1.5em 0;
+}
+
+.now-playing-content {
+  font-size: 14px;
 }
 
 .now-playing-arrow {
@@ -182,6 +186,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.current-song-more-ic {
+  visibility: visible !important;
 }
 
 .song-more-ic * {

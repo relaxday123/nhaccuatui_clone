@@ -1,5 +1,3 @@
-// import "./ProgressBar.sass";
-
 const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
