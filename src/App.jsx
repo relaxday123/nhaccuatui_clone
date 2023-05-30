@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Container>
-        <Row style={{ display: "grid", gridTemplateColumns: "11fr 72fr 17fr" }}>
+        <Row style={{ display: "grid", gridTemplateColumns: "13rem auto 20rem" }}>
           <Col>
             <NavBar />
           </Col>

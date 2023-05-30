@@ -18,6 +18,7 @@ const DisplayTrack = ({
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
+        autoPlay
       />
     </div>
   );

@@ -1,0 +1,59 @@
+.fb-ic * {
+  color: #3b5998;
+}
+
+.login-btn {
+  align-items: center;
+  background-image: linear-gradient(to right, #2f80ed, #00aeef);
+  border: 0;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  width: 13em;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.username-input input:focus {
+}
+
+.username-input {
+  color: white !important;
+  border-radius: 1px;
+  padding: 0.5rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=password]:focus .password-input {
+  border: 1px solid #2f80ed;
+}
+
+.password-input {
+  color: white !important;
+  border: 1px solid white;
+  border-radius: 1px;
+  padding: 0.5rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+

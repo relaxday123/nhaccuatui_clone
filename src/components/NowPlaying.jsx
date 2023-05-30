@@ -1,5 +1,4 @@
 import React from "react";
-import pic from "../media/img/Playing/1.jpg";
 import { TfiMicrophoneAlt } from "react-icons/tfi";
 import {
   BsFillVolumeUpFill,
@@ -13,10 +12,8 @@ import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
 import DisplayTrack from "./DisplayTrack";
 import { useRef, useState, useEffect } from "react";
-import { tracks } from "../media/mp3/tracks";
-import songs from "../media/mp3/songs.json";
+import Songs from "../media/mp3/songs.json";
 
-import { getData } from "../httpClient/endPoints";
 
 import { SlArrowDown } from "react-icons/sl";
 import { BiHeadphone } from "react-icons/bi";
@@ -25,11 +22,11 @@ import { FaPause, FaPlay } from "react-icons/fa";
 const NowPlaying = ({ list }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(songs[trackIndex]);
+  const [currentTrack, setCurrentTrack] = useState(Songs[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(50);
   const [muteVolume, setMuteVolume] = useState(false);
 
   // reference
@@ -37,12 +34,18 @@ const NowPlaying = ({ list }) => {
   const progressBarRef = useRef();
 
   const handleNext = () => {
-    if (trackIndex >= tracks.length - 1) {
-      setTrackIndex(0);
-      setCurrentTrack(tracks[0]);
+    if (isShuffle) {
+      let randomIndex = Math.floor(Math.random() * Songs.length);
+      setTrackIndex(randomIndex);
+      setCurrentTrack(Songs[randomIndex]);
     } else {
-      setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(tracks[trackIndex + 1]);
+      if (trackIndex >= Songs.length - 1) {
+        setTrackIndex(0);
+        setCurrentTrack(Songs[0]);
+      } else {
+        setTrackIndex((prev) => prev + 1);
+        setCurrentTrack(Songs[trackIndex + 1]);
+      }
     }
   };
 
@@ -53,24 +56,24 @@ const NowPlaying = ({ list }) => {
     }
   }, [volume, audioRef, muteVolume]);
 
-  const axios = require("axios");
-  const [data, setData] = useState([]);
-  const options = {
-    method: "GET",
-    url: "https://theaudiodb.p.rapidapi.com/searchalbum.php",
-    params: { s: "daft_punk" },
-    headers: {
-      "X-RapidAPI-Key": "bc9c950a49mshb7946e239311423p178408jsn57dbdd53e8f6",
-      "X-RapidAPI-Host": "theaudiodb.p.rapidapi.com",
-    },
-  };
+  // const axios = require("axios");
+  // const [data, setData] = useState([]);
+  // const options = {
+  //   method: "GET",
+  //   url: "https://theaudiodb.p.rapidapi.com/searchalbum.php",
+  //   params: { s: "daft_punk" },
+  //   headers: {
+  //     "X-RapidAPI-Key": "bc9c950a49mshb7946e239311423p178408jsn57dbdd53e8f6",
+  //     "X-RapidAPI-Host": "theaudiodb.p.rapidapi.com",
+  //   },
+  // };
 
-  useEffect(() => {
-    getData().then(function (response) {
-      setData(response.data);
-      console.log(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getData().then(function (response) {
+  //     setData(response.data);
+  //     console.log(response.data);
+  //   });
+  // }, []);
 
   const [listSong, setListSong] = useState(true);
 
@@ -78,12 +81,37 @@ const NowPlaying = ({ list }) => {
     setListSong(listSong === true ? false : true);
   };
 
-  const handleSelectSong = (e, item) => {
-    e.preventDefault();
-    setCurrentTrack(item);
+  const handleSelectSong = (e, song) => {
+    setTrackIndex(song.id);
+    setCurrentTrack(song);
+    setIsPlaying(true);
   };
 
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const [isShuffle, setIsShuffle] = useState(false);
+
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+
+    return shuffledArray;
+  }
+
+  const handleShuffle = () => {
+    setIsShuffle((prevShuffling) => !prevShuffling);
+  };
+
+  const handleRepeat = () => {
+    setIsShuffle((prevShuffling) => !prevShuffling);
+  };
 
   return (
     <div
@@ -108,7 +136,10 @@ const NowPlaying = ({ list }) => {
           <div className="now-playing-song">
             <div className="now-playing-song-info">
               <div className="now-playing-song-info-pic">
-                <img src={currentTrack.links.images[0].src} alt="now-playing-song"></img>
+                <img
+                  src={currentTrack.links.images[0].src}
+                  alt="now-playing-song"
+                ></img>
                 {isPlaying ? (
                   <FaPause className="now-playing-song-info-pic-ic" />
                 ) : (
@@ -156,7 +187,7 @@ const NowPlaying = ({ list }) => {
             <p className="song-list">Danh sách bài hát</p>
             <hr
               style={{
-                margin: "0.5em 1.5 em 0",
+                margin: "0.5em 1.5em 0",
                 opacity: ".1",
                 display: "flex",
                 justifyContent: "center",
@@ -165,14 +196,14 @@ const NowPlaying = ({ list }) => {
             />
             <div
               className="song-list-scroll"
-              style={{ height: "38em", overflow: "scroll" }}
+              style={{ height: "37em", overflow: "scroll", backgroundColor: "inherit" }}
             >
-              {songs.map((song, index) => {
-                return (
+              {Songs.map((song, index) => {
+                return song.id === trackIndex ? (
                   <div
                     className="song"
                     key={index}
-                    onClick={(event) => handleSelectSong(event, song)}
+                    style={{ backgroundColor: "#2f3943" }}
                   >
                     <div className="song-info">
                       <p
@@ -192,6 +223,35 @@ const NowPlaying = ({ list }) => {
                         {index !== song.author.length - 1 && <span>, </span>}
                       </>
                     ))} */}
+                    </div>
+                    <div className="song-more-ic current-song-more-ic">
+                      <SlOptionsVertical />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="song"
+                    key={index}
+                    onClick={(event) => handleSelectSong(event, song)}
+                  >
+                    <div className="song-info">
+                      <p
+                        style={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          width: "18em",
+                        }}
+                      >
+                        {song.title}
+                      </p>
+                      {song.author}
+                      {/* {song.author.map((artirt, index) => (
+                    <>
+                      <a href="/">{artirt}</a>
+                      {index !== song.author.length - 1 && <span>, </span>}
+                    </>
+                  ))} */}
                     </div>
                     <div className="heard-number">
                       <BiHeadphone />
@@ -315,7 +375,7 @@ const NowPlaying = ({ list }) => {
               className="volume-icon"
               onClick={() => setMuteVolume((prev) => !prev)}
             >
-              {muteVolume || volume < 5 ? (
+              {muteVolume ? (
                 <BsFillVolumeMuteFill />
               ) : volume < 40 ? (
                 <BsFillVolumeDownFill />
@@ -360,13 +420,16 @@ const NowPlaying = ({ list }) => {
             progressBarRef,
             duration,
             setTimeProgress,
-            tracks,
+            Songs,
             trackIndex,
             setTrackIndex,
             setCurrentTrack,
             handleNext,
             isPlaying,
             setIsPlaying,
+            isShuffle,
+            handleShuffle,
+            handleRepeat,
           }}
         />
         <div>
