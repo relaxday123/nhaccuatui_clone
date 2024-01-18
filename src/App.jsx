@@ -1,10 +1,10 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MainView from "./components/MainView";
 import NowPlaying from "./components/NowPlaying";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
