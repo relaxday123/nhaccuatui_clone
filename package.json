@@ -1,7 +1,7 @@
 {
   "name": "nhaccuatui",
   "version": "0.1.0",
-  "homepage": "https://relaxday123.github.io/nhaccuatui_clone",
+  "homepage": "https://relaxday123.github.io/nhaccuatui_clone/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -54,5 +54,6 @@
   "devDependencies": {
     "gh-pages": "^5.0.0",
     "tailwindcss": "^3.3.6"
-  }
+  },
+  "type": "module"
 }
